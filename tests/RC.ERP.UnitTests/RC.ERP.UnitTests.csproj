@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\RC.ERP.Domain\RC.ERP.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
