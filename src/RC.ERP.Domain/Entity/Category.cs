@@ -1,4 +1,6 @@
-﻿namespace RC.ERP.Domain.Entity
+﻿using RC.ERP.Domain.Exceptions;
+
+namespace RC.ERP.Domain.Entity
 {
     public class Category
     {
@@ -15,6 +17,14 @@
             Description = description;
             IsActive = isActive;
             CreatedAt = DateTime.Now;
+        }
+
+        public void Validade()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                throw new EntityValidationException($"{nameof(Name)} should not be ou null");
+            }
         }
     }
 }
