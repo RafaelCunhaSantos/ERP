@@ -1,6 +1,6 @@
 ### English Version
 
-# Project: .NET Core Application with Clean Code and Clean Architecture
+# Project ERP: .NET Core Application with Clean Code and Clean Architecture
 
 This project is an application developed in .NET Core, following the principles of Clean Code, Clean Architecture, Domain-Driven Design (DDD), and SOLID principles. Additionally, we use Test-Driven Development (TDD) and unit tests to ensure code quality. The goal is to provide a solid foundation for developing scalable, maintainable, and testable applications.
 
@@ -67,7 +67,7 @@ dotnet test
  ```
 ### Versão em Português
 
-# Projeto: Aplicação .NET Core com Clean Code e Arquitetura Limpa
+# Projeto ERP: Aplicação .NET Core com Clean Code e Arquitetura Limpa
 
 Este projeto é uma aplicação desenvolvida em .NET Core, seguindo os princípios de Clean Code, Arquitetura Limpa (Clean Architecture), Domain-Driven Design (DDD) e os princípios SOLID. Além disso, utilizamos Test-Driven Development (TDD) e testes unitários para garantir a qualidade do código. O objetivo é fornecer uma base sólida para o desenvolvimento de aplicações escaláveis, mantíveis e testáveis.
 
