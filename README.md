@@ -64,7 +64,7 @@ To run unit tests, use the command below:
 
 ```bash
 dotnet test
-
+ ```
 ### Versão em Português
 
 # Projeto: Aplicação .NET Core com Clean Code e Arquitetura Limpa
