@@ -38,12 +38,12 @@ To set up the development environment, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/user/project-name.git
+    git clone clone https://github.com/RafaelCunhaSantos/erp.git
     ```
 
 2. Navigate to the project directory:
     ```bash
-    cd project-name
+    cd erp.git
     ```
 
 3. Configure the environment variables and database connection string.
@@ -105,12 +105,12 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/usuario/nome-do-projeto.git
+    git clone https://github.com/RafaelCunhaSantos/erp.git
     ```
 
 2. Navegue até o diretório do projeto:
     ```bash
-    cd nome-do-projeto
+    cd erp.git
     ```
 
 3. Configure as variáveis de ambiente e a string de conexão do banco de dados.
