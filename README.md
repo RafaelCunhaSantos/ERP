@@ -65,6 +65,7 @@ To run unit tests, use the command below:
 ```bash
 dotnet test
 
+
 ### Versão em Português
 
 # Projeto: Aplicação .NET Core com Clean Code e Arquitetura Limpa
@@ -128,12 +129,6 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
 ## Execução dos Testes
 
 Para executar os testes unitários, utilize o comando abaixo:
-
-```bash
-dotnet test
-
-
-To run unit tests, use the command below:
 
 ```bash
 dotnet test
