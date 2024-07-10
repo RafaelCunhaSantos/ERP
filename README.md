@@ -60,6 +60,11 @@ To set up the development environment, follow these steps:
 
 ## Running Tests
 
+To run unit tests, use the command below:
+
+```bash
+dotnet test
+
 ### Versão em Português
 
 # Projeto: Aplicação .NET Core com Clean Code e Arquitetura Limpa
