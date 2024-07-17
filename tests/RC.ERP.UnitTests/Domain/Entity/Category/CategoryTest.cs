@@ -3,6 +3,7 @@ using RC.ERP.Domain.Exceptions;
 using RC.ERP.UnitTests.Domain.Entity.Category;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using DomainEntity = RC.ERP.Domain.Entity;
 
@@ -115,6 +116,62 @@ namespace RC.ERP.UnitTests.Domain.Entity
                 };
             }
         }
+
+        [Fact(DisplayName = nameof(InstantiateErrorWhenNameIsGreaterThan255Characters))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void InstantiateErrorWhenNameIsGreaterThan255Characters()
+        {
+            var validCategory = _categoryTestFixture.GetValidCategory();
+            var invalidName = String.Join(null, Enumerable.Range(1, 256).Select(_ => "a").ToArray());
+
+            Action action =
+                () => new DomainEntity.Category(invalidName, validCategory.Description);
+
+            action.Should()
+                .Throw<EntityValidationException>()
+                .WithMessage("Name should be less or equal 255 characters long");
+        }
+
+        [Fact(DisplayName = nameof(InstantiateErrorWhenDescriptionIsGreaterThan10_000Characters))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void InstantiateErrorWhenDescriptionIsGreaterThan10_000Characters()
+        {
+            var invalidDescription = String.Join(null, Enumerable.Range(1, 10_001).Select(_ => "a").ToArray());
+            var validCategory = _categoryTestFixture.GetValidCategory();
+
+            Action action =
+                () => new DomainEntity.Category(validCategory.Name, invalidDescription);
+
+            action.Should()
+                .Throw<EntityValidationException>()
+                .WithMessage("Description should be less or equal 10000 characters long");
+        }
+
+        [Fact(DisplayName = nameof(Activate))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void Activate()
+        {
+            var validCategory = _categoryTestFixture.GetValidCategory();
+
+            var category = new DomainEntity.Category(validCategory.Name, validCategory.Description, false);
+            category.Activate();
+
+            category.IsActive.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = nameof(Deactivate))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void Deactivate()
+        {
+            var validCategory = _categoryTestFixture.GetValidCategory();
+
+            var category = new DomainEntity.Category(validCategory.Name, validCategory.Description, true);
+            category.Deactivate();
+
+            category.IsActive.Should().BeFalse();
+        }
+
+        
 
     }
 }
