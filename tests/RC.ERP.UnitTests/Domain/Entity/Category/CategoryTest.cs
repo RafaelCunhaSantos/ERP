@@ -171,7 +171,97 @@ namespace RC.ERP.UnitTests.Domain.Entity
             category.IsActive.Should().BeFalse();
         }
 
-        
+        [Fact(DisplayName = nameof(Update))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void Update()
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+            var categoryWithNewValues = _categoryTestFixture.GetValidCategory();
 
+            category.Update(categoryWithNewValues.Name, categoryWithNewValues.Description);
+
+            category.Name.Should().Be(categoryWithNewValues.Name);
+            category.Description.Should().Be(categoryWithNewValues.Description);
+        }
+
+        [Fact(DisplayName = nameof(UpdateOnlyName))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void UpdateOnlyName()
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+            var newName = _categoryTestFixture.GetValidCategoryName();
+            var currentDescription = category.Description;
+
+            category.Update(newName);
+
+            category.Name.Should().Be(newName);
+            category.Description.Should().Be(currentDescription);
+        }
+
+        [Theory(DisplayName = nameof(UpdateErrorWhenNameIsEmpty))]
+        [Trait("Domain", "Category - Aggregates")]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("   ")]
+        public void UpdateErrorWhenNameIsEmpty(string? name)
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+            Action action =
+                () => category.Update(name!);
+
+            action.Should().Throw<EntityValidationException>()
+                .WithMessage("Name should not be empty or null");
+        }
+
+        [Theory(DisplayName = nameof(UpdateErrorWhenNameIsLessThan3Characters))]
+        [Trait("Domain", "Category - Aggregates")]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("a")]
+        [InlineData("ca")]
+        public void UpdateErrorWhenNameIsLessThan3Characters(string invalidName)
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+
+            Action action =
+                () => category.Update(invalidName);
+
+            action.Should()
+                .Throw<EntityValidationException>()
+                .WithMessage("Name should be at least 3 characters long");
+        }
+
+        [Fact(DisplayName = nameof(UpdateErrorWhenNameIsGreaterThan255Characters))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void UpdateErrorWhenNameIsGreaterThan255Characters()
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+            var invalidName = _categoryTestFixture.Faker.Lorem.Letter(256);
+
+            Action action =
+                () => category.Update(invalidName);
+
+            action.Should()
+                .Throw<EntityValidationException>()
+                .WithMessage("Name should be less or equal 255 characters long");
+        }
+
+        [Fact(DisplayName = nameof(UpdateErrorWhenDescriptionIsGreaterThan10_000Characters))]
+        [Trait("Domain", "Category - Aggregates")]
+        public void UpdateErrorWhenDescriptionIsGreaterThan10_000Characters()
+        {
+            var category = _categoryTestFixture.GetValidCategory();
+            var invalidDescription =
+                _categoryTestFixture.Faker.Commerce.ProductDescription();
+            while (invalidDescription.Length <= 10_000)
+                invalidDescription = $"{invalidDescription} {_categoryTestFixture.Faker.Commerce.ProductDescription()}";
+
+            Action action =
+                () => category.Update("Category New Name", invalidDescription);
+
+            action.Should()
+                .Throw<EntityValidationException>()
+                .WithMessage("Description should be less or equal 10000 characters long");
+        }
     }
 }
