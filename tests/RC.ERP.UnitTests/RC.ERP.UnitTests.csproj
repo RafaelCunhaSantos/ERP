@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.17.1" />
 		<PackageReference Include="Bogus" Version="34.0.1" />
 		<PackageReference Include="FluentAssertions" Version="6.5.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
@@ -23,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\src\RC.ERP.Application\RC.ERP.Application.csproj" />
 		<ProjectReference Include="..\..\src\RC.ERP.Domain\RC.ERP.Domain.csproj" />
 	</ItemGroup>
 
